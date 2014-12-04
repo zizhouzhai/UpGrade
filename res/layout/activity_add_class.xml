@@ -21,14 +21,16 @@
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:background="#3498db"
-        android:layout_alignParentLeft="true" >
+        android:layout_alignParentLeft="true"
+        android:background="#3498db" >
+
         <Button
             android:id="@+id/button1"
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:layout_margin="16dp"
-            android:background="#80bdc3c7"
+            android:background="@drawable/textback"
+            android:alpha="0.5"
             android:onClick="addClass"
             android:text="@string/go" />
     </RelativeLayout>

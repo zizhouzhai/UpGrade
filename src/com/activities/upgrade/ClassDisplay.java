@@ -3,9 +3,11 @@ package com.activities.upgrade;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;	
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +29,7 @@ public class ClassDisplay extends ActionBarActivity {
 	private ArrayList<String> sectionPercents;
 	private Context context;
 	private UpGradeClass currentClass;
+	private SwipeRefreshLayout swipeRefresh;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,27 +41,35 @@ public class ClassDisplay extends ActionBarActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_class_display);
-		
+
 		context = this;
 
 		// set up private variables
-		
+
 		ClassListManager classManager = new ClassListManager(this);
+		// get classlist
+		ArrayList<UpGradeClass> list = classManager.readFromInternalStorage();
 
 		Intent i = this.getIntent();
 		int position = i.getIntExtra("position", 0);
+		// get class
+		currentClass = list.get(position);
 
 		// find the views
 		pBar = (ProgressBar) findViewById(R.id.progressBar1);
 		listView1 = (ListView) findViewById(R.id.listView1);
+		swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+		swipeRefresh
+				.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+					@Override
+					public void onRefresh() {
+						swipeRefresh.setRefreshing(true);
+						pBar.setVisibility(View.VISIBLE);
+						listView1.setVisibility(View.INVISIBLE);
 
-		// get classlist
-		ArrayList<UpGradeClass> list = classManager.readFromInternalStorage();
-
-		// get class
-		currentClass = list.get(position);		
-		
-		new parseGradeSource().execute();
+						new parseGradeSource().execute();
+					}
+				});
 
 	}
 
@@ -88,9 +99,9 @@ public class ClassDisplay extends ActionBarActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			
+
 			currentClass.updateClass();
-			 
+
 			return null;
 
 		}
@@ -99,14 +110,16 @@ public class ClassDisplay extends ActionBarActivity {
 			pBar.setVisibility(View.INVISIBLE);
 			listView1.setVisibility(View.VISIBLE);
 			
+
 			sectionNames = currentClass.getSectionNames();
 			sectionPercents = currentClass.getSectionPercents();
-			
-			//set up listVeiw1
+
+			// set up listVeiw1
 			GradeListAdapter gAdapter = new GradeListAdapter(context,
-					R.layout.grade_list_view,sectionNames,sectionPercents);
+					R.layout.grade_list_view, sectionNames, sectionPercents);
 			listView1.setAdapter(gAdapter);
-			
+
+			swipeRefresh.setRefreshing(false);
 			
 			super.onPostExecute(result);
 		}

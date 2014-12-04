@@ -16,14 +16,13 @@ public class WebScrapManager {
 	private ArrayList<String> currentSectionNames;
 	private ArrayList<String> currentSectionPercents;
 
-	
-	public WebScrapManager(UpGradeClass upgradeClass){
+	public WebScrapManager(UpGradeClass upgradeClass) {
 		this.upgradeClass = upgradeClass;
 		currentSectionNames = new ArrayList<String>();
 		currentSectionPercents = new ArrayList<String>();
 	}
-	
-	public void updateClass(){
+
+	public void updateClass() {
 		url = upgradeClass.getGradeSourceLink();
 		number = upgradeClass.getGradeSourceNumber();
 
@@ -52,12 +51,12 @@ public class WebScrapManager {
 					// get the section names
 					if (secret_number.equals("Secret Number")) {
 						for (Element column : columns) {
-							if(!(column.text().equals("Secret Number")))
-							currentSectionNames.add(column.text());
+							if (!(column.text().equals("Secret Number")))
+								currentSectionNames.add(column.text());
 						}
 					}
 
-					//get the current
+					// get the current
 					try {
 						current = Integer.parseInt(secret_number);
 					} catch (NumberFormatException e) {
@@ -68,7 +67,7 @@ public class WebScrapManager {
 					if (current == number) {
 						for (Element column : columns) {
 							String columnText = column.text();
-							//check if it is percent column
+							// check if it is percent column
 							if (columnText.contains("%")) {
 								currentSectionPercents.add(column.text());
 
@@ -85,10 +84,8 @@ public class WebScrapManager {
 			e.printStackTrace();
 		}
 
-		
-		
 	}
 	
-
 	
+
 }

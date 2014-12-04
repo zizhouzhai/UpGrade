@@ -50,7 +50,8 @@
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:layout_margin="16dp"
-            android:background="#80bdc3c7"
+            android:background="@drawable/textback"
+            android:alpha="0.5"
             android:onClick="onClick"
             android:text="@string/go" />
     </RelativeLayout>

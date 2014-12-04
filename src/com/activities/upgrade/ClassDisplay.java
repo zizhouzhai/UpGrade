@@ -1,15 +1,9 @@
 package com.activities.upgrade;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import android.content.Context;
-import android.content.Intent;
+import android.content.Intent;	
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -29,11 +23,10 @@ public class ClassDisplay extends ActionBarActivity {
 
 	private ListView listView1;
 	private ProgressBar pBar;
-	private String url;
-	private int number;
 	private ArrayList<String> sectionNames;
 	private ArrayList<String> sectionPercents;
 	private Context context;
+	private UpGradeClass currentClass;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +42,7 @@ public class ClassDisplay extends ActionBarActivity {
 		context = this;
 
 		// set up private variables
-		sectionNames = new ArrayList<String>();
-		sectionPercents = new ArrayList<String>();
+		
 		ClassListManager classManager = new ClassListManager(this);
 
 		Intent i = this.getIntent();
@@ -64,12 +56,8 @@ public class ClassDisplay extends ActionBarActivity {
 		ArrayList<UpGradeClass> list = classManager.readFromInternalStorage();
 
 		// get class
-		UpGradeClass currentClass = list.get(position);
-
-		// get class info
-		url = currentClass.getGradeSourceLink();
-		number = currentClass.getGradeSourceNumber();
-
+		currentClass = list.get(position);		
+		
 		new parseGradeSource().execute();
 
 	}
@@ -100,62 +88,9 @@ public class ClassDisplay extends ActionBarActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			Document doc;
-			try {
-				doc = Jsoup.connect(url).get();
-				Elements tables = doc.select("table");
-				System.out.println(number);
-
-				for (Element table : tables) {
-
-					int current;
-
-					for (Element row : table.select("tr")) {
-
-						// get the first columns value
-						Elements columns = row.select("td");
-
-						// get rid of other tables
-						if (columns.size() < 1) {
-							continue;
-						}
-
-						String secret_number = columns.get(0).text();
-
-						// get the section names
-						if (secret_number.equals("Secret Number")) {
-							for (Element column : columns) {
-								if(!(column.text().equals("Secret Number")))
-								sectionNames.add(column.text());
-							}
-						}
-
-						// stringBuilder.append(secret_number);
-						try {
-							current = Integer.parseInt(secret_number);
-						} catch (NumberFormatException e) {
-							continue;
-						}
-
-						// if equals, then this is correct row.
-						if (current == number) {
-							for (Element column : columns) {
-								String columnText = column.text();
-								//check if it is percent column
-								if (columnText.contains("%")) {
-									sectionPercents.add(column.text());
-
-								}
-							}
-							return null;
-						}
-					}
-				}
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			currentClass.updateClass();
+			 
 			return null;
 
 		}
@@ -163,6 +98,9 @@ public class ClassDisplay extends ActionBarActivity {
 		protected void onPostExecute(Void result) {
 			pBar.setVisibility(View.INVISIBLE);
 			listView1.setVisibility(View.VISIBLE);
+			
+			sectionNames = currentClass.getSectionNames();
+			sectionPercents = currentClass.getSectionPercents();
 			
 			//set up listVeiw1
 			GradeListAdapter gAdapter = new GradeListAdapter(context,

@@ -12,8 +12,8 @@ public class UpGradeClass implements Serializable{
 	private String name;
 	private String gradeSource_link;
 	private int gradeSource_number;
-	private ArrayList<String> sectionNames;
-	private ArrayList<String> sectionPercents;
+	private ArrayList<String> sectionNames = new ArrayList<String>();
+	private ArrayList<String> sectionPercents= new ArrayList<String>();
 
 	
 	// Constructors

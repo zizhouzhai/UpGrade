@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.upgrade.MainActivity$PlaceholderFragment" >
+
+    <ListView
+        android:id="@+id/class_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relative2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp" >
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/relative2"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#3498db" >
+
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:background="#80bdc3c7"
+            android:onClick="addClass"
+            android:src="@android:drawable/ic_menu_add"
+            android:text="@string/go" />
+    </RelativeLayout>
+
+</RelativeLayout>

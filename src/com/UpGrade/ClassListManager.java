@@ -73,4 +73,18 @@ public class ClassListManager {
 				
 	}
 	
+	public void updateClassinList(UpGradeClass toUpdate){
+		
+		list.remove(toUpdate);
+		//toUpdate.updateClass();
+		list.add(toUpdate);
+		this.saveToInternalStorage(list);
+		
+	}
+	
+	public void addClass(UpGradeClass toAdd){
+		list.add(toAdd);
+		this.saveToInternalStorage(list);
+	}
+	
 }

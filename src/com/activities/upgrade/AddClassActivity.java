@@ -60,13 +60,10 @@ public class AddClassActivity extends ActionBarActivity {
 		EditText nameText = (EditText) findViewById(R.id.editText1);
 		String name = nameText.getText().toString();
 
-		UpGradeClass newClass = new UpGradeClass(name);
-
-		list.add(newClass);
-
-		classManager.saveToInternalStorage(list);
-
-		Intent i = new Intent(this, MainActivity.class);
+		
+		
+		Intent i = new Intent(this, LinkGradeSource.class);
+		i.putExtra("class_name", name);
 		startActivity(i);
 
 	}

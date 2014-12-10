@@ -3,11 +3,16 @@ package com.UpGrade;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * 
+ * Represents one class. Each class should hold its own section information,
+ * name, gradesource link and number
+ * 
+ * @author Wingo's
+ *
+ */
 public class UpGradeClass implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 944563812578072380L;
 	private String name;
 	private String gradeSource_link;
@@ -16,23 +21,39 @@ public class UpGradeClass implements Serializable{
 	private ArrayList<String> sectionPercents= new ArrayList<String>();
 
 	
-	// Constructors
+	
+	/**
+	 * One param constructor
+	 * @param name name of the class
+	 */
 	public UpGradeClass(String name){
 		this.name = name;
 		this.setGradeSourceLink(null);
 		this.setGradeSourceNumber(0);
 	}
 	
+	/**
+	 * Default constructor of UpGradeClass. Name will be blank.
+	 */
 	public UpGradeClass(){
 		name = "blank";
 		this.setGradeSourceLink(null);
 		this.setGradeSourceNumber(0);
 	}
 	
+	public UpGradeClass(String name, String link, int number){
+		this.name = name;
+		this.gradeSource_link = link;
+		this.gradeSource_number = number;
+	}
 
-	public void updateClass(){
+	/**
+	 * Creates a WebScrapManager which will update this class. Should be called
+	 * in a new thread.
+	 */
+	public UpGradeClass updateClass(){
 		WebScrapManager scrapManager = new WebScrapManager(this);
-		scrapManager.updateClass();
+		return scrapManager.updateClass();
 	}
 	
 	
@@ -78,7 +99,16 @@ public class UpGradeClass implements Serializable{
 	}
 
 
-	
+	@Override
+    public boolean equals(Object other) {
+        if (!(other instanceof UpGradeClass)) {
+            return false;
+        }
+        UpGradeClass otherClass = (UpGradeClass) other;
+        return this.name.equals(otherClass.name) &&
+               this.gradeSource_link.equals(otherClass.gradeSource_link) &&
+               this.gradeSource_number == otherClass.gradeSource_number;
+    }
 	
 	
 	

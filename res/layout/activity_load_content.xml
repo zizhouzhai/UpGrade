@@ -19,8 +19,8 @@
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:layout_margin="16dp"
-            android:background="@drawable/textback"
             android:alpha="0.5"
+            android:background="@drawable/textback"
             android:onClick="goToClassList"
             android:text="@string/go" />
     </RelativeLayout>
@@ -46,10 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:gravity ="center"
-            android:background="@drawable/textback"
+            android:background="@android:color/transparent"
+            android:gravity="center"
             android:text="@string/app_name"
+            android:textSize="28sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white"
             android:typeface="serif" />
     </LinearLayout>
 

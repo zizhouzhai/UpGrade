@@ -50,18 +50,18 @@
             <ListView
                 android:id="@+id/listView1"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:visibility="invisible" >
+                android:layout_height="fill_parent" >
             </ListView>
-
-            <ProgressBar
-                android:id="@+id/progressBar1"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
         </android.support.v4.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 </LinearLayout>

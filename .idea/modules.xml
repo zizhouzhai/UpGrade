@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/UpGrade.iml" filepath="$PROJECT_DIR$/UpGrade.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../android-support-v7-appcompat/android-support-v7-appcompat.iml" filepath="$PROJECT_DIR$/../android-support-v7-appcompat/android-support-v7-appcompat.iml" />
     </modules>
   </component>
 </project>

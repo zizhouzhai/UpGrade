@@ -17,7 +17,7 @@ public class LinkGradeSource extends ActionBarActivity {
 	
 	ArrayList<UpGradeClass> list;
 	ClassListManager classManager;
-	int position;
+	String name;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class LinkGradeSource extends ActionBarActivity {
 		setContentView(R.layout.activity_link_grade_source);
 		
 		Intent i = this.getIntent();
-		position = i.getIntExtra("position", 0);
+		name = i.getStringExtra("name");
 		
 		classManager = new ClassListManager(this.getApplicationContext());
 		
@@ -64,11 +64,9 @@ public class LinkGradeSource extends ActionBarActivity {
 		EditText numberText = (EditText)findViewById(R.id.number_editText);
 		int number = Integer.parseInt(numberText.getText().toString());
 		
-		UpGradeClass toChange = list.get(position);
-		toChange.setGradeSourceLink(link);
-		toChange.setGradeSourceNumber(number);
+		UpGradeClass newClass = new UpGradeClass(name, link, number);
+		classManager.addClass(newClass);
 		
-		classManager.saveToInternalStorage(list);
 		Intent i = new Intent(getApplicationContext(),MainActivity.class);
 		startActivity(i);
 		

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -30,6 +29,7 @@ public class ClassDisplay extends ActionBarActivity {
 	private Context context;
 	private UpGradeClass currentClass;
 	private SwipeRefreshLayout swipeRefresh;
+	private ClassListManager classListManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +43,29 @@ public class ClassDisplay extends ActionBarActivity {
 		setContentView(R.layout.activity_class_display);
 
 		context = this;
+		pBar = (ProgressBar) findViewById(R.id.progressBar1);
+		listView1 = (ListView) findViewById(R.id.listView1);
+		swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+
 
 		// set up private variables
 
-		ClassListManager classManager = new ClassListManager(this);
+		classListManager = new ClassListManager(this);
 		// get classlist
-		ArrayList<UpGradeClass> list = classManager.readFromInternalStorage();
+		ArrayList<UpGradeClass> list = classListManager.readFromInternalStorage();
 
 		Intent i = this.getIntent();
 		int position = i.getIntExtra("position", 0);
 		// get class
 		currentClass = list.get(position);
+		sectionNames = currentClass.getSectionNames();
+		sectionPercents = currentClass.getSectionPercents();
+		GradeListAdapter gAdapter = new GradeListAdapter(context,
+				R.layout.grade_list_view, sectionNames, sectionPercents);
+		listView1.setAdapter(gAdapter);
+
 
 		// find the views
-		pBar = (ProgressBar) findViewById(R.id.progressBar1);
-		listView1 = (ListView) findViewById(R.id.listView1);
-		swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 		swipeRefresh
 				.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 					@Override
@@ -100,7 +107,8 @@ public class ClassDisplay extends ActionBarActivity {
 		@Override
 		protected Void doInBackground(Void... params) {
 
-			currentClass.updateClass();
+			classListManager.updateClassinList(currentClass.updateClass());
+			//currentClass.updateClass();
 
 			return null;
 

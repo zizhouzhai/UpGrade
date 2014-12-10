@@ -22,7 +22,7 @@ public class WebScrapManager {
 		currentSectionPercents = new ArrayList<String>();
 	}
 
-	public void updateClass() {
+	public UpGradeClass updateClass() {
 		url = upgradeClass.getGradeSourceLink();
 		number = upgradeClass.getGradeSourceNumber();
 
@@ -73,9 +73,10 @@ public class WebScrapManager {
 
 							}
 						}
+						currentSectionNames.remove(0);
 						upgradeClass.setSectionNames(currentSectionNames);
 						upgradeClass.setSectionPercents(currentSectionPercents);
-						return;
+						return upgradeClass;
 					}
 				}
 			}
@@ -83,6 +84,7 @@ public class WebScrapManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return upgradeClass;
 
 	}
 	

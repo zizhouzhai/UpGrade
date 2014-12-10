@@ -35,9 +35,10 @@ public class GradeListAdapter extends ArrayAdapter<String>{
 		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 		row = inflater.inflate(layoutResourceId, parent, false);
 		
+		
 		TextView name = (TextView)row.findViewById(R.id.section_name);
 		TextView grade = (TextView)row.findViewById(R.id.section_grade);
-		name.setText(names.get(position+1));
+		name.setText(names.get(position));
 		grade.setText(grades.get(position));
 		return row;
 		

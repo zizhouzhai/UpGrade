@@ -16,11 +16,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.activities.upgrade.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.activities.upgrade.LoadContent"
+            android:name=".LoadContent"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,16 +29,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.activities.upgrade.AddClassActivity"
+            android:name=".AddClassActivity"
             android:label="@string/title_activity_add_class" >
         </activity>
         <activity
-            android:name="com.activities.upgrade.ClassDisplay"
+            android:name=".ClassDisplay"
             android:label="@string/title_activity_class_display" >
         </activity>
         <activity
-            android:name="com.activities.upgrade.LinkGradeSource"
+            android:name=".LinkGradeSource"
             android:label="@string/title_activity_link_grade_source" >
+        </activity>
+        <activity
+            android:name=".GradeSectionDetailed"
+            android:label="@string/title_activity_grade_section_detailed" >
         </activity>
     </application>
 

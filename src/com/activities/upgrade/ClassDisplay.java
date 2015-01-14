@@ -13,8 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 import com.UpGrade.ClassListManager;
 import com.UpGrade.UpGradeClass;
@@ -37,8 +40,8 @@ public class ClassDisplay extends ActionBarActivity {
 
 		// get rid of the action bar.
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		/*this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
 
 		setContentView(R.layout.activity_class_display);
 
@@ -63,6 +66,26 @@ public class ClassDisplay extends ActionBarActivity {
 		GradeListAdapter gAdapter = new GradeListAdapter(context,
 				R.layout.grade_list_view, sectionNames, sectionPercents);
 		listView1.setAdapter(gAdapter);
+		listView1.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				Intent i = new Intent(getApplicationContext(),GradeSectionDetailed.class);
+				i.putExtra("gradeSource_link",currentClass.getGradeSourceLink());
+				TextView section_name = (TextView)view.findViewById(R.id.section_name);
+				TextView section_grade = (TextView)view.findViewById(R.id.section_grade);
+				i.putExtra("section_name",section_name.getText().toString());
+				
+				String toHighlightString = section_grade.getText().toString();
+				toHighlightString = toHighlightString.replace("%", "");
+				i.putExtra("toHighlight", (int)(Double.parseDouble(toHighlightString)));
+				startActivity(i);
+			}
+			
+			
+		});
 
 
 		// find the views

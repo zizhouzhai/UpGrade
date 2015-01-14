@@ -16,6 +16,15 @@ public class WebScrapManager {
 	private ArrayList<String> currentSectionNames;
 	private ArrayList<String> currentSectionPercents;
 
+	public WebScrapManager(String gs_link) {
+
+		url = gs_link;
+		number = 0;
+		currentSectionNames = new ArrayList<String>();
+		currentSectionPercents = new ArrayList<String>();
+
+	}
+
 	public WebScrapManager(UpGradeClass upgradeClass) {
 		this.upgradeClass = upgradeClass;
 		currentSectionNames = new ArrayList<String>();
@@ -29,22 +38,17 @@ public class WebScrapManager {
 		Document doc;
 		try {
 			doc = Jsoup.connect(url).get();
-			Elements tables = doc.select("table");
-			System.out.println(number);
+			Elements tables = doc.select("table[cellpadding=3][cellspacing=0]");
+			System.out.println(tables.size());
 
 			for (Element table : tables) {
 
-				int current;
+				int current;	
 
 				for (Element row : table.select("tr")) {
 
 					// get the first columns value
 					Elements columns = row.select("td");
-
-					// get rid of other tables
-					if (columns.size() < 1) {
-						continue;
-					}
 
 					String secret_number = columns.get(0).text();
 
@@ -87,7 +91,78 @@ public class WebScrapManager {
 		return upgradeClass;
 
 	}
-	
-	
+
+	public ArrayList<Integer> parseSection(String sectionName) {
+
+		ArrayList<Integer> toReturn = new ArrayList<Integer>();
+		Document doc;
+		try {
+			doc = Jsoup.connect(url).get();
+			Elements tables = doc.select("table[cellpadding=3][cellspacing=0]");
+
+			// for each table
+			for (Element table : tables) {
+
+				Elements rows = table.select("tr");	
+				
+				//get the first row to find position of section name
+				Element firstRow = rows.get(0);
+				
+				int count = -1;
+				//get all the columns in firstrow
+				for(Element column : firstRow.select("td")){
+					
+					//find the position of the one.
+					if(column.text().equals(sectionName)){
+						break;
+					}
+					else
+						count++;
+				}
+				
+				//get the thirdrow
+				Element thirdRow = rows.get(2);
+				
+				//second counter to see how many columns across
+				int finalyPos = 0;
+				for(Element column : thirdRow.select("td")){
+						
+					//if % column, add
+					if(column.text().contains("%")){
+						count --;
+						if(count == 0){
+							break;
+						}
+					}
+					finalyPos++;
+				}
+				
+				Element currentRow;
+				Element currentColumn;
+				//loop through all the rows, starting from row 4.
+				for(int i = 3;i<rows.size();i++){
+					//get the row
+					currentRow = rows.get(i);
+					//get the column
+					currentColumn = currentRow.select("td").get(finalyPos);
+					//get column text
+					String currentColumn_text = currentColumn.text();
+					//remove %
+					currentColumn_text = currentColumn_text.replace("%", "");
+					//add number to arraylist
+					toReturn.add((int)(Double.parseDouble(currentColumn_text)));
+				}
+
+				return toReturn;
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
 
 }

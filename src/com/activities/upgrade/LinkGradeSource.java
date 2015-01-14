@@ -8,7 +8,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.UpGrade.ClassListManager;
 import com.UpGrade.UpGradeClass;
@@ -22,10 +24,11 @@ public class LinkGradeSource extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_link_grade_source);
-		
+
 		Intent i = this.getIntent();
-		name = i.getStringExtra("name");
+		name = i.getStringExtra("class_name");
 		
 		classManager = new ClassListManager(this.getApplicationContext());
 		
@@ -63,6 +66,16 @@ public class LinkGradeSource extends ActionBarActivity {
 		
 		EditText numberText = (EditText)findViewById(R.id.number_editText);
 		int number = Integer.parseInt(numberText.getText().toString());
+		
+		if (link.matches("")) {
+		    Toast.makeText(this, "You did not enter a link", Toast.LENGTH_SHORT).show();
+		    return;
+		}
+		if(numberText.getText().toString().length()<1 ){
+			Toast.makeText(this, "You did not enter a number", Toast.LENGTH_SHORT).show();
+		    return;
+		}
+		
 		
 		UpGradeClass newClass = new UpGradeClass(name, link, number);
 		classManager.addClass(newClass);

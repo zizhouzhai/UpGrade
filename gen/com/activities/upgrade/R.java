@@ -1095,15 +1095,16 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f090002;
         public static final int action_menu_presenter=0x7f090003;
         public static final int action_mode_close_button=0x7f090024;
-        public static final int action_settings=0x7f09004d;
+        public static final int action_settings=0x7f09004f;
         public static final int activity_chooser_view_content=0x7f090025;
         public static final int always=0x7f09000f;
         public static final int beginning=0x7f090016;
         public static final int button1=0x7f09003e;
+        public static final int chart=0x7f090044;
         public static final int checkbox=0x7f09002d;
-        public static final int class_edit=0x7f090048;
-        public static final int class_list=0x7f090049;
-        public static final int class_name=0x7f090047;
+        public static final int class_edit=0x7f09004b;
+        public static final int class_list=0x7f09004c;
+        public static final int class_name=0x7f09004a;
         public static final int collapseActionView=0x7f090010;
         public static final int container=0x7f09003c;
         public static final int default_activity_button=0x7f090028;
@@ -1120,8 +1121,9 @@ containing a value of this type.
         public static final int icon=0x7f09002a;
         public static final int ifRoom=0x7f090011;
         public static final int image=0x7f090027;
-        public static final int imageView1=0x7f090046;
-        public static final int link_editText=0x7f090044;
+        public static final int imageView1=0x7f090049;
+        public static final int imageView2=0x7f090048;
+        public static final int link_editText=0x7f090046;
         public static final int listMode=0x7f090006;
         public static final int listView1=0x7f090042;
         public static final int list_item=0x7f090029;
@@ -1129,12 +1131,12 @@ containing a value of this type.
         public static final int never=0x7f090012;
         public static final int none=0x7f090019;
         public static final int normal=0x7f090007;
-        public static final int number_editText=0x7f090045;
+        public static final int number_editText=0x7f090047;
+        public static final int progressBar=0x7f090045;
         public static final int progressBar1=0x7f090043;
         public static final int progress_circular=0x7f090004;
         public static final int progress_horizontal=0x7f090005;
         public static final int radio=0x7f09002f;
-        public static final int relative2=0x7f09004a;
         public static final int search_badge=0x7f090032;
         public static final int search_bar=0x7f090031;
         public static final int search_button=0x7f090033;
@@ -1145,8 +1147,8 @@ containing a value of this type.
         public static final int search_plate=0x7f090036;
         public static final int search_src_text=0x7f090037;
         public static final int search_voice_btn=0x7f09003b;
-        public static final int section_grade=0x7f09004c;
-        public static final int section_name=0x7f09004b;
+        public static final int section_grade=0x7f09004e;
+        public static final int section_name=0x7f09004d;
         public static final int shortcut=0x7f09002e;
         public static final int showCustom=0x7f09000b;
         public static final int showHome=0x7f09000c;
@@ -1215,19 +1217,21 @@ containing a value of this type.
         public static final int abc_simple_decor=0x7f030017;
         public static final int activity_add_class=0x7f030018;
         public static final int activity_class_display=0x7f030019;
-        public static final int activity_link_grade_source=0x7f03001a;
-        public static final int activity_load_content=0x7f03001b;
-        public static final int class_list_view=0x7f03001c;
-        public static final int fragment_main=0x7f03001d;
-        public static final int grade_list_view=0x7f03001e;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
+        public static final int activity_grade_section_detailed=0x7f03001a;
+        public static final int activity_link_grade_source=0x7f03001b;
+        public static final int activity_load_content=0x7f03001c;
+        public static final int class_list_view=0x7f03001d;
+        public static final int fragment_main=0x7f03001e;
+        public static final int grade_list_view=0x7f03001f;
+        public static final int support_simple_spinner_dropdown_item=0x7f030020;
     }
     public static final class menu {
         public static final int add_class=0x7f0c0000;
         public static final int class_display=0x7f0c0001;
-        public static final int link_grade_source=0x7f0c0002;
-        public static final int load_content=0x7f0c0003;
-        public static final int main=0x7f0c0004;
+        public static final int grade_section_detailed=0x7f0c0002;
+        public static final int link_grade_source=0x7f0c0003;
+        public static final int load_content=0x7f0c0004;
+        public static final int main=0x7f0c0005;
     }
     public static final class string {
         public static final int Title=0x7f0a0010;
@@ -1291,6 +1295,7 @@ containing a value of this type.
         public static final int section_name=0x7f0a0020;
         public static final int title_activity_add_class=0x7f0a0016;
         public static final int title_activity_class_display=0x7f0a0019;
+        public static final int title_activity_grade_section_detailed=0x7f0a0024;
         public static final int title_activity_link_grade_source=0x7f0a001a;
         public static final int title_activity_load_content=0x7f0a0013;
     }

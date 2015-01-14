@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.UpGrade.ClassListManager;
 import com.UpGrade.UpGradeClass;
@@ -24,8 +25,8 @@ public class AddClassActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		// get rid of the action bar.
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		/*this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
 
 		setContentView(R.layout.activity_add_class);
 
@@ -60,7 +61,10 @@ public class AddClassActivity extends ActionBarActivity {
 		EditText nameText = (EditText) findViewById(R.id.editText1);
 		String name = nameText.getText().toString();
 
-		
+		if (name.matches("")) {
+		    Toast.makeText(this, "You did not enter a name", Toast.LENGTH_SHORT).show();
+		    return;
+		}
 		
 		Intent i = new Intent(this, LinkGradeSource.class);
 		i.putExtra("class_name", name);

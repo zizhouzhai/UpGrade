@@ -39,7 +39,7 @@ public class WebScrapManager {
 		try {
 			doc = Jsoup.connect(url).get();
 			Elements tables = doc.select("table[cellpadding=3][cellspacing=0]");
-			System.out.println(tables.size());
+			System.out.println("table size: " +tables.size());
 
 			for (Element table : tables) {
 

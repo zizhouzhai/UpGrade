@@ -58,6 +58,7 @@ public class GradeSectionDetailed extends Activity {
 		bChart.setDrawVerticalGrid(false);
 		bChart.setDrawLegend(false);
 		bChart.setDrawBarShadow(false);
+		bChart.setDrawYValues(false);
 		 XLabels xl = bChart.getXLabels();
 	        xl.setPosition(XLabelPosition.BOTTOM);
 		
@@ -102,7 +103,7 @@ public class GradeSectionDetailed extends Activity {
 		
 			int max = Collections.max(results);
 			
-			int[] valComp = new int[max];
+			int[] valComp = new int[max+1];
 			
 			//
 			for(int i = 0; i < results.size();i++){
@@ -110,7 +111,7 @@ public class GradeSectionDetailed extends Activity {
 			}
 			
 			ArrayList<String> xVals = new ArrayList<String>();
-			for(int i = 0; i < max; i++){
+			for(int i = 0; i < max+1; i++){
 				xVals.add(Integer.toString(i));
 			}
 			
